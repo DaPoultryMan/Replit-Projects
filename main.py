@@ -19,13 +19,13 @@ player_x = 100
 player_y = 300
 flying = False
 y_speed = 0
-gravity = 0.3
-map_speed = 20
+gravity = 0.1
+map_speed = 2
 score = 0
 high_score = 0
 active = True
-chicken = pygame.transform.scale(pygame.image.load('Chicken.png'), (60, 60))
-chicken_death = pygame.transform.scale(pygame.image.load('Chicken Death.png'), (60, 60))
+#chicken = pygame.transform.scale(pygame.image.load('Chicken.png'), (60, 60))
+#chicken_death = pygame.transform.scale(pygame.image.load('Chicken Death.png'), (60, 60))
 
 
 def generate_new():
@@ -53,9 +53,9 @@ def draw_map(rects):
 
 
 def draw_player():
-  player = pygame.draw.circle(screen, 'black', (player_x, player_y), 20)
-  if active == True:
-    screen.blit(chicken, (player_x - 40, player_y - 30))
+  player = pygame.draw.circle(screen, 'white', (player_x, player_y), 20)
+  #if active == True:
+    #screen.blit(chicken, (player_x - 40, player_y - 30))
   return player
 
 
@@ -89,7 +89,7 @@ def move_rects(rects):
 def check_collision(rects, circle, act):
     for i in range(len(rects)):
         if circle.colliderect(rects[i]):
-          screen.blit(chicken_death, (player_x - 40, player_y - 30))
+          #screen.blit(chicken_death, (player_x - 40, player_y - 30))
           act = False
     return act
 
@@ -126,7 +126,7 @@ while run:
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_SPACE:
                 flying = False
-    map_speed = 20 + score//1000
+    map_speed = 2 + score//1000
     spacer = 1 + score//2000
 
     screen.blit(font.render(f'Score: {score}', True, 'black'), (20, 15))
