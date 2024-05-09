@@ -24,8 +24,8 @@ map_speed = 2
 score = 0
 high_score = 0
 active = True
-#chicken = pygame.transform.scale(pygame.image.load('Chicken.png'), (60, 60))
-#chicken_death = pygame.transform.scale(pygame.image.load('Chicken Death.png'), (60, 60))
+chicken = pygame.transform.scale(pygame.image.load('chicken.png'), (60, 60))
+chicken_death = pygame.transform.scale(pygame.image.load('chicken_death.png'), (60, 60))
 
 
 def generate_new():
@@ -54,8 +54,8 @@ def draw_map(rects):
 
 def draw_player():
   player = pygame.draw.circle(screen, 'white', (player_x, player_y), 20)
-  #if active == True:
-    #screen.blit(chicken, (player_x - 40, player_y - 30))
+  if active == True:
+    screen.blit(chicken, (player_x - 40, player_y - 30))
   return player
 
 
@@ -89,7 +89,7 @@ def move_rects(rects):
 def check_collision(rects, circle, act):
     for i in range(len(rects)):
         if circle.colliderect(rects[i]):
-          #screen.blit(chicken_death, (player_x - 40, player_y - 30))
+          screen.blit(chicken_death, (player_x - 40, player_y - 30))
           act = False
     return act
 
