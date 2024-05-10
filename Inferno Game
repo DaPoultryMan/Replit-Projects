@@ -1,0 +1,69 @@
+import time
+
+def introduction():
+  print("Welcome to Dante's Inferno Game!")
+  time.sleep(1)
+  print("You find yourself at the entrance of Hell.")
+  time.sleep(1)
+  print("Dante's guide, Virgil, is with you.")
+  time.sleep(1)
+  print("You have nine circles of Hell to explore.")
+  time.sleep(1)
+
+def choose_circle():
+  print("\nChoose a circle of Hell to enter:")
+  print("1, 2, 3, 4, 5, 6, 7, 8, 9")
+
+  while True:
+    choice = input("Enter the number of the circle (1-9): ")
+    if choice in ['1', '2', '3', '4', '5', '6', '7', '8', '9']:
+      return int(choice)
+    else:
+      print("Invalid choice. Please enter a number between 1 and 9.")
+
+def solve_puzzle(circle):
+  puzzles = [
+      "I house the virtuous pagans, wise and sound, But in Heaven's light, my grounds are not found. Who am I? ",
+      "In passion's flame, the souls forever burn, Where love misguided took a fatal turn. Which circle am I? ",
+      "Endless rain and hail, a wretched plight, Feeding on refuse in eternal night. Guess the circle, if you might! ",
+      "Gold and silver bind me in their chains, Endless desire for wealth and gains. Which circle hosts my avaricious pains? ",
+      "In the river Styx, I boil and churn, The angry souls in their fiery urn. Name the circle where I eternally yearn. ",
+      "For questioning faith, I bear the cost, In burning tombs, the heretics are lost. What's the circle where my rebellion is tossed? ",
+      "Blood and screams paint my brutal floor, Against neighbor, self, and nature's core. Which circle bears this violent lore? ",
+      "In masks of deceit, I weave my plot, A devilish scheme, a deceptive lot. Which circle sees my fraudulent knot? ",
+      "Frozen in ice, traitors weep and groan, In the deepest pit, they stand alone. What's the circle where betrayal is known? "
+  ]
+
+  answers = [
+      "limbo", "lust", "gluttony", "greed", "wrath", "heresy", "violence",
+      "fraud", "treachery"
+  ]
+
+  print(puzzles[circle - 1])
+  user_answer = input("Your answer: ").lower()
+
+  if user_answer == answers[circle - 1]:
+    print("Correct! You may proceed to the next circle.")
+    time.sleep(1)
+  else:
+    print("Incorrect. Virgil frowns upon your lack of knowledge. Try again.")
+
+def explore_circle(circle):
+  circles = [
+      "Limbo", "Lust", "Gluttony", "Greed", "Wrath", "Heresy", "Violence",
+      "Fraud", "Treachery"
+  ]
+
+  solve_puzzle(circle)
+
+def main():
+  introduction()
+
+  for _ in range(9):
+    circle = choose_circle()
+    explore_circle(circle)
+
+  print("\nCongratulations! You have explored all nine circles of Hell.")
+
+if __name__ == "__main__":
+  main()
