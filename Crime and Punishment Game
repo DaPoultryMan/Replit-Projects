@@ -1,0 +1,63 @@
+import random
+import os
+
+class Game:
+    def __init__(self):
+        self.health = 100
+        self.moral_state = 100
+        self.wealth = 0
+
+    def display_status(self):
+        print(f"Health: {self.health}")
+        print(f"Moral State: {self.moral_state}")
+        print(f"Wealth: {self.wealth}")
+
+    def make_decision(self, decision):
+        if decision == "commit":
+            self.health -= random.randint(10, 30)
+            self.moral_state -= random.randint(30, 50)
+            self.wealth += random.randint(100, 500)
+        elif decision == "resist":
+            self.health -= random.randint(5, 15)
+            self.moral_state += random.randint(5, 15)
+            self.wealth -= random.randint(50, 200)
+        else:
+            print("Invalid decision.")
+
+        self.display_status()
+        self.check_game_over()
+
+    def check_game_over(self):
+        if self.health <= 0:
+            print("You have died.")
+            exit()
+        elif self.moral_state <= 0:
+            print("You succumbed to guilt.")
+            exit()
+        elif self.wealth >= 1000:
+            print("You achieved wealth but at what cost?")
+            exit()
+
+def main():
+  print("Welcome to Raskolnikov's Dilemma: A Crime and Punishment   Adventure!")
+  
+  game = Game()
+  
+  while True:
+    print("You are faced with a moral decision:")
+    print("1. Commit the crime")
+    print("2. Resist the urge")
+
+    choice = input("Enter your choice (1 or 2): ")
+
+    os.system("clear")
+
+    if choice == "1":
+        game.make_decision("commit")
+    elif choice == "2":
+        game.make_decision("resist")
+    else:
+        print("Invalid choice. Please enter 1 or 2.")
+
+if __name__ == "__main__":
+    main()
