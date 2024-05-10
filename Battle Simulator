@@ -1,0 +1,105 @@
+import random, os, time
+
+def rollDice(side):
+    result = random.randint(1, side)
+    return result
+
+def health():
+    healthStat = ((rollDice(6) * rollDice(12)) / 2) + 10
+    return healthStat
+
+def strength():
+    strengthStat = ((rollDice(6) * rollDice(8)) / 2) + 12
+    return strengthStat
+
+def print_health_bar(name, health, max_health):
+    bar_length = 20
+    filled = int(bar_length * health / max_health)
+    health_bar = "#" * filled + "-" * (bar_length - filled)
+    print(f"{name} Health: [{health_bar}] {health:.2f}/{max_health:.2f}")
+
+print("Battle Simulator")
+print()
+
+c1Name = input("Name your Guy:\n")
+c1Type = input("Character Type:\n")
+print()
+
+c1Health = health()
+c1MaxHealth = c1Health
+c1Strength = strength()
+
+print(c1Name)
+print_health_bar("Health", c1Health, c1MaxHealth)
+print("Strength:", c1Strength)
+print()
+
+print("Who are they battling?")
+print()
+
+c2Name = input("Name your Guy:\n")
+c2Type = input("Character Type:\n")
+print()
+
+c2Health = health()
+c2MaxHealth = c2Health
+c2Strength = strength()
+
+print(c2Name)
+print_health_bar("Health", c2Health, c2MaxHealth)
+print("Strength:", c2Strength)
+print()
+
+round = 1
+winner = None
+
+while True:
+    time.sleep(2)
+    os.system("clear")
+    print("Battle Time")
+    print()
+    print("The battle begins!")
+
+    c1Dice = rollDice(6)
+    c2Dice = rollDice(6)
+
+    difference = abs(c1Strength - c2Strength) + 1
+
+    if c1Dice > c2Dice:
+        c2Health -= difference
+        if round == 1:
+            print(c1Name, "wins the first blow")
+        else:
+            print(c1Name, "wins round", round)
+    elif c2Dice > c1Dice:
+        c1Health -= difference
+        if round == 1:
+            print(c2Name, "wins the first blow")
+        else:
+            print(c2Name, "wins round", round)
+    else:
+        print("Their swords clash and they draw round", round)
+
+    print()
+    print_health_bar(c1Name, c1Health, c1MaxHealth)
+    print()
+    print_health_bar(c2Name, c2Health, c2MaxHealth)
+    print()
+
+    if c1Health <= 0:
+        print(c1Name, "has died!")
+        winner = c2Name
+        break
+    elif c2Health <= 0:
+        print(c2Name, "has died!")
+        winner = c1Name
+        break
+    else:
+        print("And they're both standing for the next round")
+        round += 1
+
+time.sleep(1)
+os.system("clear")
+print("Battle Time")
+print()
+print(winner, "has won in", round, "rounds!")
