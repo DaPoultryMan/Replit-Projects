@@ -53,7 +53,7 @@ def draw_map(rects):
 
 
 def draw_player():
-  player = pygame.draw.circle(screen, 'white', (player_x, player_y), 20)
+  player = pygame.draw.circle(screen, 'black', (player_x, player_y), 20)
   if active == True:
     screen.blit(chicken, (player_x - 40, player_y - 30))
   return player
